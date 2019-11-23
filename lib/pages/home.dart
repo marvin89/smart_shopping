@@ -20,7 +20,6 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getSharedText();
   }
@@ -39,8 +38,12 @@ class _HomeState extends State<Home> {
   }
 
   getSharedText() async {
-    print("TEXT");
-    var sharedData = await platform.invokeMethod('getSavedNote');
-    print(sharedData);
+    try {
+      print("TEXT");
+      var sharedData = await platform.invokeMethod('getSavedNote');
+      print(sharedData);
+    } on PlatformException catch (error) {
+      print(error.message);
+    }
   }
 }

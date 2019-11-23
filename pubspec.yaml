@@ -27,6 +27,8 @@ dependencies:
   mobx: ^0.3.9+3
   flutter_mobx: ^0.3.3+3
   provider: ^2.0.1+1
+  dio: ^3.0.6
+  dio_flutter_transformer: ^3.0.2
 
 dev_dependencies:
   flutter_test:

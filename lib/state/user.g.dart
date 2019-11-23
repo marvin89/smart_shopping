@@ -54,4 +54,34 @@ mixin _$User on UserBase, Store {
       _$UserBaseActionController.endAction(_$actionInfo);
     }
   }
+
+  @override
+  void populateShoppingList(List<ShoppingItem> _shoppingList) {
+    final _$actionInfo = _$UserBaseActionController.startAction();
+    try {
+      return super.populateShoppingList(_shoppingList);
+    } finally {
+      _$UserBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void addToShoppingList(ShoppingItem item) {
+    final _$actionInfo = _$UserBaseActionController.startAction();
+    try {
+      return super.addToShoppingList(item);
+    } finally {
+      _$UserBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void updateShoppingItemCount(int amount, int index) {
+    final _$actionInfo = _$UserBaseActionController.startAction();
+    try {
+      return super.updateShoppingItemCount(amount, index);
+    } finally {
+      _$UserBaseActionController.endAction(_$actionInfo);
+    }
+  }
 }

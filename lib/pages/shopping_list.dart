@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
+import 'package:smart_shopping/config/http.dart';
 import 'package:smart_shopping/state/user.dart';
 
 class ShoppingList extends StatefulWidget {
@@ -13,6 +14,17 @@ class _ShoppingListState extends State<ShoppingList> {
   TextEditingController _shoppingItemController = new TextEditingController();
   FocusNode _shoppingItemFocus = new FocusNode();
   User _user;
+
+  @override
+  void initState() {
+    super.initState();
+    _getShoppingList();
+  }
+
+  void _getShoppingList() async {
+    final savedShoppingList = await http.get('/listShoppingItems');
+    print(savedShoppingList);
+  }
 
   @override
   Widget build(BuildContext context) {
