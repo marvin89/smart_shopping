@@ -26,6 +26,23 @@ mixin _$User on UserBase, Store {
     }, _$isLoggedInAtom, name: '${_$isLoggedInAtom.name}_set');
   }
 
+  final _$shoppingListAtom = Atom(name: 'UserBase.shoppingList');
+
+  @override
+  List<ShoppingItem> get shoppingList {
+    _$shoppingListAtom.context.enforceReadPolicy(_$shoppingListAtom);
+    _$shoppingListAtom.reportObserved();
+    return super.shoppingList;
+  }
+
+  @override
+  set shoppingList(List<ShoppingItem> value) {
+    _$shoppingListAtom.context.conditionallyRunInAction(() {
+      super.shoppingList = value;
+      _$shoppingListAtom.reportChanged();
+    }, _$shoppingListAtom, name: '${_$shoppingListAtom.name}_set');
+  }
+
   final _$UserBaseActionController = ActionController(name: 'UserBase');
 
   @override
