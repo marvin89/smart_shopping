@@ -24,14 +24,14 @@ abstract class UserBase with Store {
     if (amount == 0) {
       shoppingList.removeAt(index);
     } else {
-      shoppingList[index].count = amount;
+      shoppingList[index].amount = amount;
     }
   }
 }
 
 class ShoppingItem {
   String name;
-  int count;
+  int amount;
 
-  ShoppingItem({this.name, this.count}) : super();
+  ShoppingItem({this.name, this.amount}) : super();
 }

@@ -86,7 +86,7 @@ class _ShoppingListState extends State<ShoppingList> {
     }
 
     setState(() {
-      _user.addToShoppingList(new ShoppingItem(name: inputValue, count: 1));
+      _user.addToShoppingList(new ShoppingItem(name: inputValue, amount: 1));
       _shoppingItemController.clear();
       _shoppingItemFocus.unfocus();
     });
@@ -113,16 +113,16 @@ class _ShoppingListState extends State<ShoppingList> {
           icon: Icon(Icons.remove),
           onPressed: () {
             setState(() {
-              _user.updateShoppingItemCount(item.count - 1, index);
+              _user.updateShoppingItemCount(item.amount - 1, index);
             });
           },
         ),
-        Text('${item.count}'),
+        Text('${item.amount}'),
         IconButton(
           icon: Icon(Icons.add),
           onPressed: () {
             setState(() {
-              _user.updateShoppingItemCount(item.count + 1, index);
+              _user.updateShoppingItemCount(item.amount + 1, index);
             });
           },
         )

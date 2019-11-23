@@ -4,11 +4,6 @@ class Welcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Text('Smart Shopping'),
-        ),
-      ),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -21,6 +16,17 @@ class Welcome extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
+              Container(
+                height: MediaQuery.of(context).size.height / 3,
+                child: Text(
+                  'Smart Shopping',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
               Container(
                 margin: EdgeInsets.only(bottom: 10),
                 child: Text(
