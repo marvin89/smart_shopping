@@ -1,36 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:smart_shopping/config/router.dart';
+import 'package:smart_shopping/pages/home.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+    ),
+  );
 
-class MyApp extends StatelessWidget {
+  ApplicationRouter.configureRoutes();
+  runApp(SmartShopping());
+}
+
+class SmartShopping extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _SmartShoppingState();
+}
+
+class _SmartShoppingState extends State<SmartShopping> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.blue,
+        brightness: Brightness.light,
       ),
-      home: MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key}) : super(key: key);
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Text('Smart Shopping'),
-        ),
-      ),
-      body: Center(),
+      home: Home(),
+      initialRoute: 'home',
+      onGenerateRoute: ApplicationRouter.router.generator,
     );
   }
 }
