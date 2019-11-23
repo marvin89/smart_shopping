@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:smart_shopping/config/router.dart';
 import 'package:smart_shopping/pages/home.dart';
+import 'package:smart_shopping/state/user.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
@@ -22,15 +24,20 @@ class SmartShopping extends StatefulWidget {
 class _SmartShoppingState extends State<SmartShopping> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        brightness: Brightness.light,
+    return MultiProvider(
+      providers: [
+        Provider<User>(builder: (_) => User()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          brightness: Brightness.light,
+        ),
+        home: Home(),
+        initialRoute: 'home',
+        onGenerateRoute: ApplicationRouter.router.generator,
       ),
-      home: Home(),
-      initialRoute: 'home',
-      onGenerateRoute: ApplicationRouter.router.generator,
     );
   }
 }
