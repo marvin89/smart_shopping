@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_shopping/config/router.dart';
 import 'package:smart_shopping/pages/home.dart';
+import 'package:smart_shopping/state/search.dart';
 import 'package:smart_shopping/state/user.dart';
 
 void main() {
@@ -27,6 +28,7 @@ class _SmartShoppingState extends State<SmartShopping> {
     return MultiProvider(
       providers: [
         Provider<User>(builder: (_) => User()),
+        Provider<Search>(builder: (_) => Search()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

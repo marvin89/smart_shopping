@@ -15,6 +15,16 @@ class ApplicationRouter {
     );
   }
 
+  static Handler _homeHandler = Handler(
+      handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
+          Home());
+  static Handler _loginHandler = Handler(
+      handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
+          Login());
+  static Handler _shoppingListHandler = Handler(
+      handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
+          ShoppingList(searchQuery: params['searchQuery'][0]));
+
   static void configureRoutes() {
     router.notFoundHandler = Handler(
       handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -22,10 +32,10 @@ class ApplicationRouter {
         return null;
       },
     );
-    router.define('home', handler: routeHandler(Home()));
+    router.define('home', handler: _homeHandler);
     router.define('login',
-        handler: routeHandler(Login()),
+        handler: _loginHandler,
         transitionType: TransitionType.materialFullScreenDialog);
-    router.define('shopping-list', handler: routeHandler(ShoppingList()));
+    router.define('shopping-list/:searchQuery', handler: _shoppingListHandler);
   }
 }

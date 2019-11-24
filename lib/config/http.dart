@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:dio_flutter_transformer/dio_flutter_transformer.dart';
 
 BaseOptions options = new BaseOptions(
-  baseUrl: 'http://192.168.87.113:8080',
+  baseUrl: 'http://25.80.87.69:8080',
   connectTimeout: 5000,
   receiveTimeout: 3000,
 );

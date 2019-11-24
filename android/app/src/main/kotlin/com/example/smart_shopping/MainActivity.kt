@@ -8,7 +8,6 @@ import io.flutter.plugin.common.MethodChannel
 import android.content.ContextWrapper
 import android.content.Intent
 import android.content.IntentFilter
-import com.google.android.gms.actions.NoteIntents
 
 
 class MainActivity: FlutterActivity() {
@@ -19,7 +18,7 @@ class MainActivity: FlutterActivity() {
     super.onCreate(savedInstanceState)
     GeneratedPluginRegistrant.registerWith(this)
 
-    handleShareIntent()
+    handleShareIntent(getIntent())
 
     MethodChannel(flutterView, "app.channel.shared.data")
         .setMethodCallHandler { call, result ->
@@ -30,14 +29,19 @@ class MainActivity: FlutterActivity() {
     }
   }
 
-  fun handleShareIntent() {
+  override fun onNewIntent(intent: Intent) {
+    super.onNewIntent(intent)
+    handleVoiceSearch(intent)
+  }
+
+  fun handleVoiceSearch(intent: Intent) {
     val action = intent.action
     val type = intent.type
 
-    handleSendText(intent)
+    handleShareIntent(intent)
   }
 
-  fun handleSendText(intent: Intent) {
+  fun handleShareIntent(intent: Intent) {
       sharedText = intent.getStringExtra(Intent.EXTRA_TEXT)
   }
 }

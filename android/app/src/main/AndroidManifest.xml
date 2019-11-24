@@ -9,11 +9,11 @@
     <uses-permission android:name="android.permission.ACTION_CREATE_NOTE" />
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="smart_shopping"
+        android:label="Smart Shopping"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
@@ -33,6 +33,10 @@
                <action android:name="com.google.android.gms.actions.CREATE_NOTE"/>
                <category android:name="android.intent.category.DEFAULT"/>
                <data android:mimeType="text/plain"/>
+            </intent-filter>
+            <intent-filter>
+               <action android:name="com.google.android.gms.actions.SEARCH_ACTION"/>
+               <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
     </application>

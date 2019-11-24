@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
+import 'package:smart_shopping/components/conditional_content.dart';
 import 'package:smart_shopping/config/http.dart';
+import 'package:smart_shopping/state/search.dart';
 import 'package:smart_shopping/state/user.dart';
 
 class ShoppingList extends StatefulWidget {
+  final String searchQuery;
+
+  ShoppingList({this.searchQuery});
+
   @override
   _ShoppingListState createState() => _ShoppingListState();
 }
@@ -14,76 +20,111 @@ class _ShoppingListState extends State<ShoppingList> {
   TextEditingController _shoppingItemController = new TextEditingController();
   FocusNode _shoppingItemFocus = new FocusNode();
   User _user;
+  Search _search;
+  bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
+
+    print(widget.searchQuery);
+    _shoppingItemController.text = widget.searchQuery;
+
     _getShoppingList();
   }
 
   void _getShoppingList() async {
-    final savedShoppingList = await http.get('/listShoppingItems');
-    print(savedShoppingList);
+    try {
+      // final data = (await http.get('/listShoppingItems')).data;
+      // final List<ShoppingItem> shoppingList =
+      //     _parseShoppingList(data['shoppingList']);
+      // _user.populateShoppingList(shoppingList);
+      setState(() {
+        // _shoppingItemController.text = widget.searchQuery;
+        _isLoading = false;
+      });
+    } catch (error) {
+      print(error);
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  List<ShoppingItem> _parseShoppingList(List shoppingList) {
+    List<ShoppingItem> parsedShoppingList = [];
+    shoppingList.forEach((item) {
+      parsedShoppingList
+          .add(ShoppingItem(amount: item['amount'], name: item['name']));
+    });
+    return parsedShoppingList;
   }
 
   @override
   Widget build(BuildContext context) {
     _user = Provider.of<User>(context);
+    _search = Provider.of<Search>(context);
 
     return Observer(
       builder: (context) => Scaffold(
         key: _drawerKey,
-        body: CustomScrollView(
-          slivers: <Widget>[
-            SliverAppBar(
-              automaticallyImplyLeading: false,
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              brightness: Brightness.light,
-              actionsIconTheme: IconThemeData(color: Colors.blue),
-              iconTheme: IconThemeData(color: Colors.blue),
-              title: Container(
-                child: Card(
-                  elevation: 8,
-                  child: Row(
-                    children: <Widget>[
-                      IconButton(
-                        icon: Icon(Icons.menu),
-                        onPressed: () {
-                          _drawerKey.currentState.openDrawer();
-                        },
-                      ),
-                      Expanded(
-                        child: TextFormField(
-                          onFieldSubmitted: _onInputSubmitted,
-                          controller: _shoppingItemController,
-                          focusNode: _shoppingItemFocus,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
+        body: ConditionalContent(
+          condition: _isLoading,
+          truthy: Center(
+            child: CircularProgressIndicator(),
+          ),
+          falsy: CustomScrollView(
+            slivers: <Widget>[
+              SliverAppBar(
+                automaticallyImplyLeading: false,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                brightness: Brightness.light,
+                actionsIconTheme: IconThemeData(color: Colors.blue),
+                iconTheme: IconThemeData(color: Colors.blue),
+                title: Container(
+                  child: Card(
+                    elevation: 8,
+                    child: Row(
+                      children: <Widget>[
+                        IconButton(
+                          icon: Icon(Icons.menu),
+                          onPressed: () {
+                            _drawerKey.currentState.openDrawer();
+                          },
+                        ),
+                        Expanded(
+                          child: TextFormField(
+                            onFieldSubmitted: _onInputSubmitted,
+                            controller: _shoppingItemController,
+                            focusNode: _shoppingItemFocus,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                            ),
                           ),
                         ),
-                      ),
-                      FlatButton(
-                        textColor: Colors.blue,
-                        onPressed: _onInputSubmitted,
-                        child: Text('Add'),
-                      )
-                    ],
+                        FlatButton(
+                          textColor: Colors.blue,
+                          onPressed: _onInputSubmitted,
+                          child: Text('Add'),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            SliverList(
-              delegate: SliverChildListDelegate(
-                List.generate(
-                  _user.shoppingList.length,
-                  (int index) {
-                    return _shoppingListWidget(_user.shoppingList, index);
-                  },
+              SliverList(
+                delegate: SliverChildListDelegate(
+                  List.generate(
+                    _user.shoppingList.length,
+                    (int index) {
+                      return _shoppingListWidget(_user.shoppingList, index);
+                    },
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         drawer: Drawer(),
       ),
