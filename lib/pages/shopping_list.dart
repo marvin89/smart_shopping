@@ -155,6 +155,12 @@ class _ShoppingListState extends State<ShoppingList> {
           ),
         ),
         drawer: Drawer(),
+        floatingActionButton: FloatingActionButton(
+          onPressed: (){
+            Navigator.pushNamed(context, 'store-map');
+          },
+          child: Icon(Icons.map),
+        ),
       ),
     );
   }

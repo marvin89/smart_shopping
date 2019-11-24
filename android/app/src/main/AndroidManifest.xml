@@ -11,6 +11,7 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="Smart Shopping"
         android:icon="@mipmap/launcher_icon">
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyBB5gMNLkZ6sl2c6_O7gVOzG22PUOLPb9s"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTask"
