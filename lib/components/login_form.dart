@@ -21,12 +21,14 @@ class _LoginFormState extends State<LoginForm> {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           TextFormField(
+            initialValue: 'user@domain.com',
             decoration: InputDecoration(labelText: 'E-mail'),
           ),
           TextFormField(
+            initialValue: 'SecretPassw0rd',
             obscureText: true,
             decoration: InputDecoration(
-              labelText: 'Password',
+              labelText: 'Parola',
             ),
           ),
           Container(
@@ -38,7 +40,7 @@ class _LoginFormState extends State<LoginForm> {
                 _user.setLoginState(true);
                 Navigator.pop(context);
               },
-              child: Text('Sign in'),
+              child: Text('Login'),
             ),
           ),
         ],

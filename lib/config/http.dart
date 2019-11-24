@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:dio_flutter_transformer/dio_flutter_transformer.dart';
 
 BaseOptions options = new BaseOptions(
-  baseUrl: 'http://25.80.87.69:8080',
+  baseUrl: 'https://frozen-peak-93725.herokuapp.com/',
   connectTimeout: 5000,
   receiveTimeout: 3000,
 );

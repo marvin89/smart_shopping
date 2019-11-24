@@ -18,30 +18,34 @@ class Welcome extends StatelessWidget {
             children: <Widget>[
               Container(
                 height: MediaQuery.of(context).size.height / 3,
-                child: Text(
-                  'Smart Shopping',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(bottom: 10),
-                child: Text(
-                  'To continue, please sign in first',
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                  ),
+                child: Column(
+                  children: <Widget>[
+                    Text(
+                      'Smart Shopping',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 10),
+                      child: Text(
+                        'Cumpărături fără bătăi de cap',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               RaisedButton(
                 elevation: 8,
                 color: Colors.blueAccent,
                 colorBrightness: Brightness.dark,
-                child: Text('Sign in'),
+                child: Text('Login'),
                 onPressed: () {
                   Navigator.pushNamed(context, 'login');
                 },

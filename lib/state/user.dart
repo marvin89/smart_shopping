@@ -37,8 +37,9 @@ abstract class UserBase with Store {
 }
 
 class ShoppingItem {
+  String id;
   String name;
   int amount;
 
-  ShoppingItem({this.name, this.amount}) : super();
+  ShoppingItem({this.id, this.name, this.amount}) : super();
 }
