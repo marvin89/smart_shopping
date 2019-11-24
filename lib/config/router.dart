@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_shopping/pages/home.dart';
 import 'package:smart_shopping/pages/login.dart';
 import 'package:smart_shopping/pages/shopping_list.dart';
+import 'package:smart_shopping/pages/store_map.dart';
 
 class ApplicationRouter {
   static Router router = Router();
@@ -18,6 +19,9 @@ class ApplicationRouter {
   static Handler _homeHandler = Handler(
       handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
           Home());
+  static Handler _mapHandler = Handler(
+      handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
+          StoreMap());
   static Handler _loginHandler = Handler(
       handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
           Login());
@@ -33,6 +37,7 @@ class ApplicationRouter {
       },
     );
     router.define('home', handler: _homeHandler);
+    router.define('store-map', handler: _mapHandler);
     router.define('login',
         handler: _loginHandler,
         transitionType: TransitionType.materialFullScreenDialog);
