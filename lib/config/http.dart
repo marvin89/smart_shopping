@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:dio_flutter_transformer/dio_flutter_transformer.dart';
 
 BaseOptions options = new BaseOptions(
-  baseUrl: 'https://frozen-peak-93725.herokuapp.com/',
+  baseUrl: 'https://serene-garden-60740.herokuapp.com/',
   connectTimeout: 5000,
   receiveTimeout: 3000,
 );
